@@ -63,7 +63,6 @@ router.post('/add_availability_Schedule', function (req, res) {
     let request = req.body;
     var doctor_id = req.user_id
     const rules = {
-
         date: "required",
         start_time: "required",
         end_time: "required",
@@ -78,34 +77,11 @@ router.post('/add_availability_Schedule', function (req, res) {
     };
 });
 
+// To check availability Slot
 router.post('/get_availability_slote', function(req,res){
     auth.getAvailabilitySlote(req,function(code,message,data){
         middleware.sendResponse(req,res,code,message,data);
     })
-})
-
-//ADD BOOK SCHEDULE
-router.post('/book_schedule', function (req, res) {
-    // middleware.decryption(req.body, function (request) {
-    let request = req.body;
-    var patient_id = req.user_id
-
-    const rules = {
-        doctor_id: "required",
-        reason: "required",
-        date: "required",
-        start_time: "required",
-        end_time: "required"
-    };
-    const message = {
-        required: req.language.rest_keywords_required_messages
-    };
-    if (middleware.checkValidationRules(request, res, rules, message)) {
-        auth.book_schedule(request, patient_id, function (code, message, data) {
-            middleware.sendResponse(req, res, code, message, data);
-        });
-    };
-    // });
 });
 
 //checkavailablity
