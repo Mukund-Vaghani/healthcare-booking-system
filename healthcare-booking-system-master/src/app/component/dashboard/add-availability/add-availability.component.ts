@@ -33,7 +33,8 @@ export class AddAvailabilityComponent {
     this.submitted = true;
     
     if(this.availabilityForm.valid){
-      console.log('valid');
+      console.log('valid',this.availabilityForm.value);
+      // return
       this.user.addAvailability(this.availabilityForm.value)
     }else{
       console.log('invalid');

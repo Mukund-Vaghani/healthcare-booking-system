@@ -11,6 +11,8 @@ export class HomeComponent {
   role:any=localStorage.getItem('role');
   slotData:any
   appointmentCount:any
+  appointmentData:any
+  infoDataFlag = false
 
   constructor(private user: AuthService){}
 
@@ -25,8 +27,10 @@ export class HomeComponent {
   }
 
   infoData(data:any){
-    this.user.getAppointmentCount(data).subscribe((response)=>{
-      console.log(response);
+    this.user.getAppointmentData(data).subscribe((response)=>{
+      this.infoDataFlag = true
+      console.log(response)
+      this.appointmentData = response
     })
   }
 

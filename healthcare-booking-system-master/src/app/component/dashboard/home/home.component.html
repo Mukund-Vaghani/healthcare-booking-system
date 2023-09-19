@@ -34,7 +34,9 @@
             <h4>{{appointmentCount.past_count?appointmentCount.past_count:0}}</h4>
         </div>
         <div>
-            <a (click)="infoData({filter:'past'})">More Info</a>
+            <span *ngIf="appointmentCount.past_count > 0">
+                <a (click)="infoData({filter:'past'})" style="color: blue; text-decoration: underline;">More Info</a>
+            </span>
         </div>
     </div>
     <div class="card">
@@ -46,7 +48,41 @@
             <h4>{{appointmentCount.scheduled_count?appointmentCount.scheduled_count:0}}</h4>
         </div>
         <div>
-            <a (click)="infoData({filter:'scheduled'})">More Info</a>
+            <a (click)="infoData({filter:'scheduled'})" style="color: blue; text-decoration: underline;">More
+                Info</a>
         </div>
     </div>
+</div>
+
+<div class="table-div" id="doctor" *ngIf="infoDataFlag">
+
+    <div class="category-header">
+        <h3 style=" margin: 5px 0px 5px 2px;">List of Appointment</h3>
+        <!-- <button class="btn btn-danger" (click)="openModal()"><i class="fa-solid fa-plus"></i> Add a New Product</button> -->
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Appointment Time</th>
+                <th scope="col">Reason</th>
+                <!-- <th scope="col"></th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of appointmentData">
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.doctor_name}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.appointment_time}}</td>
+                <td>{{i.reason}}</td>
+                <!-- <td>
+                    <button class="btn btn-danger" (click)="openModal(i.doctor_id,i.date,i.start_time)">Book</button>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+    <!-- <button class="btn btn-primary" (click)="back()">Back</button> -->
 </div>
