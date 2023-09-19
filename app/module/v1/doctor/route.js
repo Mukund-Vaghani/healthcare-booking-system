@@ -162,4 +162,13 @@ router.post('/bookdoctor', function (req, res) {
 });
 
 
+
+//User Dashboard
+router.post('/user_dashboard', function (req, res) {
+    auth.userDashboard(req, function (code, message, data) {
+        middleware.sendResponse(req, res, code, message, data);
+    });
+});
+
+
 module.exports = router;

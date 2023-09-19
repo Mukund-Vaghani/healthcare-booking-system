@@ -1,10 +1,10 @@
-<div class="main-home">
+<div class="main-home" *ngIf="role=='D'">
     <span *ngFor="let i of slotData">
 
-        <div class="card">
+        <div class="card" [ngClass]="{ 'red-text': i.booked === 0, 'green-text': i.booked === 1 }">
             <div class="card-title">
                 <h1>Date</h1>
-                <h5>{{i.date}}</h5>
+                <h4>{{i.date}}</h4>
             </div>
             <div class="card-content">
                 <h3>Slote Time</h3>
@@ -22,24 +22,31 @@
             </div>
         </div>
     </span>
-    <!-- <div class="card">
+</div>
+
+<div class="main-home" *ngIf="role=='P'">
+    <div class="card">
         <div class="card-title">
-            <h1>Date</h1>
-            <h5>12/09/23</h5>
+            <h1>Past Appointment</h1>
         </div>
         <div class="card-content">
-            <h3>Slote Time</h3>
-            <h5>
-                <span>Start Time</span>
-                <p>11:30:00</p>
-            </h5>
-            <h5>
-                <span>End Time</span>
-                <p>11:30:00</p>
-            </h5>
+            <h3>Total Past Appointments</h3>
+            <h4>0</h4>
         </div>
         <div>
             <a routerLink="category">More Info</a>
         </div>
-    </div> -->
+    </div>
+    <div class="card">
+        <div class="card-title">
+            <h1>Scheduled Appointment</h1>
+        </div>
+        <div class="card-content">
+            <h3>Total Scheduled Appointments</h3>
+            <h4>0</h4>
+        </div>
+        <div>
+            <a routerLink="category">More Info</a>
+        </div>
+    </div>
 </div>

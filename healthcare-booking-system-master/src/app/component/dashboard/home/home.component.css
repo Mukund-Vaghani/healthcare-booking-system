@@ -77,3 +77,12 @@ a.routerLink:hover {
 /* .main-home {
     backgroundcoli: green;
 } */
+
+/* .red-text {
+    color: red;
+} */
+
+.green-text {
+    background-color: #4CAF50;
+    color: rgb(0, 0, 0); 
+}

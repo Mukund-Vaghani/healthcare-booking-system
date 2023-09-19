@@ -8,15 +8,17 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class HomeComponent {
 
+  role:any=localStorage.getItem('role');
   slotData:any
 
   constructor(private user: AuthService){}
 
   ngOnInit(){
     this.user.getSloteData(localStorage.getItem('UserToken')).subscribe((response)=>{
-      console.log(response)
       this.slotData=response
     });
+
+    // this.user.
   }
 
 }

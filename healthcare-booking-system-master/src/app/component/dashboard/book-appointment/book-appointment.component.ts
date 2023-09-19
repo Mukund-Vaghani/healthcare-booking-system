@@ -65,4 +65,8 @@ export class BookAppointmentComponent {
     //     this.doctorList = response;
     // });
   }
+
+  back(){
+    this.available = !this.available
+  }
 }

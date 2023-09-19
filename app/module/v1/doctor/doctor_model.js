@@ -211,5 +211,33 @@ var auth = {
             };
         });
     },
+
+    // USER DASHBOARD FUNCTION
+    userDashboard: function(req, callback){
+        let sql = ``;
+        if(req.body.filter){
+            if(req.body.filter == 'past'){
+                sql = ` a.date < CURRENT_DATE`;
+            } else {
+                sql = ` a.date >= CURRENT_DATE`;
+            };
+            con.query(`SELECT *,(SELECT CONCAT(u.first_name,' ',u.last_name) FROM tbl_user AS u WHERE u.id = a.doctor_id) AS doctor_name FROM tbl_book_appointment AS a WHERE ${sql}`,function(err,result){
+                console.log(err);
+                if(!err && result.length > 0){
+                    callback('1','rest_keywords_success',result);
+                } else {
+                    callback('0','No Appointment found!!',null);
+                };
+            });
+        } else {
+            con.query(`SELECT (SELECT COUNT(id) WHERE date < CURRENT_DATE) AS past_count,(SELECT COUNT(id) WHERE date >= CURRENT_DATE) AS scheduled_count FROM tbl_book_appointment WHERE patient_id = ${req.user_id}`,function(err, result){
+                if (!err) {
+                    callback('1','rest_keywords_success',result);
+                } else {
+                    callback('0','No Data Found!',null);
+                };
+            });
+        };
+    },
 }
 module.exports = auth;
