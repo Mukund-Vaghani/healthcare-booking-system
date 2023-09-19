@@ -170,4 +170,37 @@ export class AuthService {
       console.log(error);
     })
   }
+
+  
+  getAppointmentCount(data:any): Observable<any> {
+    return new Observable<any>((observer) => {
+
+      axios({ method: 'post', url: 'http://localhost:8597/v1/doctors/appointment_count', headers: { 'api-key': '20230420', 'token': localStorage.getItem('UserToken'), 'Content-Type': 'application/json' }}).then((response) => {
+        if (response.data.code == 1) {
+          observer.next(response.data.data)
+          observer.complete();
+        } else {
+          observer.error(response.data.message);
+        };
+      }).catch((error: any) => {
+        this.toastr.error(error, 'Error!');
+      });
+    })
+  }
+
+  getAppointmentData(data:any): Observable<any> {
+    return new Observable<any>((observer) => {
+
+      axios({ method: 'post', url: 'http://localhost:8597/v1/doctors/user_dashboard', headers: { 'api-key': '20230420', 'token': localStorage.getItem('UserToken'), 'Content-Type': 'application/json' }, data:data}).then((response) => {
+        if (response.data.code == 1) {
+          observer.next(response.data.data)
+          observer.complete();
+        } else {
+          observer.error(response.data.message);
+        };
+      }).catch((error: any) => {
+        this.toastr.error(error, 'Error!');
+      });
+    })
+  }
 }

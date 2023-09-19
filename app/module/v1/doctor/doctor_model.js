@@ -239,5 +239,15 @@ var auth = {
             });
         };
     },
+
+    appointment_count: function (req, callback) {
+        con.query(`SELECT IFNULL((SELECT COUNT(id) WHERE date < CURRENT_DATE),0) AS past_count,IFNULL((SELECT COUNT(id) WHERE date >= CURRENT_DATE),0) AS scheduled_count FROM tbl_book_appointment WHERE patient_id = ${req.user_id}`, function (err, result) {
+            if (!err) {
+                callback('1', 'rest_keywords_success', result);
+            } else {
+                callback('0', 'No Data Found!', null);
+            };
+        });
+    },
 }
 module.exports = auth;

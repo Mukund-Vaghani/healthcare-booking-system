@@ -10,6 +10,7 @@ export class HomeComponent {
 
   role:any=localStorage.getItem('role');
   slotData:any
+  appointmentCount:any
 
   constructor(private user: AuthService){}
 
@@ -18,7 +19,15 @@ export class HomeComponent {
       this.slotData=response
     });
 
-    // this.user.
+    this.user.getAppointmentCount('').subscribe((response)=>{
+      this.appointmentCount = response[0]
+    })
+  }
+
+  infoData(data:any){
+    this.user.getAppointmentCount(data).subscribe((response)=>{
+      console.log(response);
+    })
   }
 
 }

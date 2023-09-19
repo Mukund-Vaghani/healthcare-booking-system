@@ -52,7 +52,6 @@ export class BookAppointmentComponent {
   }
 
   openModal(id:any,date:any,time:any): void {
-    console.log(id);
     const modalRef = this.modalService.open(BookModalComponent);
 
     modalRef.componentInstance.id = id;

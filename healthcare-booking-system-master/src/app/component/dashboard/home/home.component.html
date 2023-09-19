@@ -31,10 +31,10 @@
         </div>
         <div class="card-content">
             <h3>Total Past Appointments</h3>
-            <h4>0</h4>
+            <h4>{{appointmentCount.past_count?appointmentCount.past_count:0}}</h4>
         </div>
         <div>
-            <a routerLink="category">More Info</a>
+            <a (click)="infoData({filter:'past'})">More Info</a>
         </div>
     </div>
     <div class="card">
@@ -43,10 +43,10 @@
         </div>
         <div class="card-content">
             <h3>Total Scheduled Appointments</h3>
-            <h4>0</h4>
+            <h4>{{appointmentCount.scheduled_count?appointmentCount.scheduled_count:0}}</h4>
         </div>
         <div>
-            <a routerLink="category">More Info</a>
+            <a (click)="infoData({filter:'scheduled'})">More Info</a>
         </div>
     </div>
 </div>
