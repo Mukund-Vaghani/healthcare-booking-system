@@ -14,6 +14,7 @@ export class HomeComponent {
 
   ngOnInit(){
     this.user.getSloteData(localStorage.getItem('UserToken')).subscribe((response)=>{
+      console.log(response)
       this.slotData=response
     });
   }

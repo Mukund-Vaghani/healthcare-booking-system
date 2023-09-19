@@ -1,5 +1,6 @@
 var con = require('../../../config/database');
 var common = require('../../../config/common');
+var moment = require('moment')
 
 var auth = {
     signup: function (req, callback) {
@@ -124,13 +125,14 @@ var auth = {
         });
     },
 
-    getAvailabilitySlote: function(req,callback){
-        con.query(`select * from tbl_availability where doctor_id = ${req.user_id} order by date ASC`, function(error,result){
-            if(!error){
+    getAvailabilitySlote: function (req, callback) {
+        con.query(`select * from tbl_availability where doctor_id = ${req.user_id} order by date ASC`, function (error, result) {
+            if (!error) {
+                console.log(result)
                 let curren_date = new Date()
                 filter_result = result.filter(item => item.date >= curren_date)
-                callback('1','success',filter_result)
-            }else{
+                callback('1', 'success', filter_result)
+            } else {
                 callback('0', 'rest_keywords_something_wrong', null);
             }
         })
@@ -208,31 +210,16 @@ var auth = {
     },
 
     //checkAvailability
-
     checkAvailability: function (request, callback) {
-        con.query(
-            `SELECT *
-          FROM tbl_availability
-          WHERE
-            is_active = 1
-            AND is_delete = 0
-            AND doctor_id = ${request.doctor_id}
-            AND date = '${request.date}'
-            AND start_time <= '${request.start_time}'
-            AND end_time >= '${request.end_time}';
-          
-           `,
-            function (error, result) {
-
-                if (error) {
-                    callback('0', 'Error occurred', {});
-                } else if (result.length === 0) {
-                    callback('2', 'No available doctors found for the selected date and time ', {});
-                } else {
-                    callback('1', 'Data found', result);
-                }
-            }
-        );
+        con.query(`SELECT a.*,(SELECT CONCAT(u.first_name,' ',u.last_name) FROM tbl_user AS u WHERE u.id = a.doctor_id) AS doctor_name FROM tbl_availability AS a WHERE a.is_active = 1 AND a.is_delete = 0 AND a.date = '${request.date}' AND ('${request.appointment_time}' BETWEEN a.start_time AND a.end_time) AND a.booked = 0`, function (error, result) {
+            if (error) {
+                callback('0', 'Error occurred', {});
+            } else if (result.length === 0) {
+                callback('2', 'No available doctors found for the selected date and time ', {});
+            } else {
+                callback('1', 'Data found', result);
+            };
+        });
     },
 
     //docterlisting
@@ -272,6 +259,33 @@ var auth = {
                 callback('1', 'rest_keywords_success', result[0])
             } else {
                 callback('0', 'rest_keywords_nodata', null);
+            };
+        });
+    },
+
+    // BOOK DOCTOR FUNCTION
+    bookDoctor: function (req, callback) {
+        var appointment_date = moment(req.appointment_date).format('YYYY-MM-DD');
+
+        let insertObject = {
+            doctor_id: req.doctor_id,
+            patient_id: req.user_id,
+            date: appointment_date,
+            appointment_time: req.appointment_time,
+            reason: req.reason,
+        };
+
+        con.query(`INSERT INTO tbl_book_appointment SET ?`, [insertObject], function (err, result) {
+            if (!err) {
+                con.query(`UPDATE tbl_availability SET booked = 1 WHERE doctor_id = ${req.doctor_id} AND date = '${appointment_date}' AND start_time = '${req.appointment_time}'`, function (err, result) {
+                    if (!err) {
+                        callback('1', 'Appointment booked Successfully!', null);
+                    } else {
+                        callback('0', 'rest_keywords_something_wrong', null);
+                    };
+                });
+            } else {
+                callback('0', 'rest_keywords_something_wrong', null);
             };
         });
     },

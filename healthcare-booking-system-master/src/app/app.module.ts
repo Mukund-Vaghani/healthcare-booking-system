@@ -17,6 +17,7 @@ import { HomeComponent } from './component/dashboard/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { BookModalComponent } from './component/dashboard/book-appointment/book-modal/book-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ToastrModule } from 'ngx-toastr';
     AddAvailabilityComponent,
     BookAppointmentComponent,
     HomeComponent,
+    BookModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -91,7 +91,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Doctor Name</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Start Time</th>
+                    <th scope="col">Appointment Time</th>
                     <!-- <th scope="col">End Time</th> -->
                     <th scope="col">Action</th>
                 </tr>
@@ -101,10 +101,10 @@
                     <th scope="row">{{i.doctor_id}}</th>
                     <td>{{i.doctor_name}}</td>
                     <td>{{i.date}}</td>
-                    <td>{{i.appointment_time}}</td>
+                    <td>{{i.start_time}}</td>
                     <!-- <td>{{i.end_time}}</td> -->
                     <td>
-                        <button class="btn btn-danger" (click)="AppointmentBooking(i.doctor_id)">Book</button>
+                        <button class="btn btn-danger" (click)="openModal(i.doctor_id,i.date,i.start_time)">Book</button>
                     </td>
                 </tr>
             </tbody>

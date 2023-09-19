@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/service/auth.service';
+import { BookModalComponent } from './book-modal/book-modal.component';
 
 @Component({
   selector: 'app-book-appointment',
@@ -15,7 +17,7 @@ export class BookAppointmentComponent {
   available = false;
   doctorList:any;
 
-  constructor (private fb:FormBuilder, private router:Router, private user:AuthService) { 
+  constructor (private fb:FormBuilder, private router:Router, private user:AuthService, private modalService: NgbModal) { 
     this.bookAppointment = this.fb.group({
       date:['',Validators.required,],
       appointment_time: ['', Validators.required],
@@ -47,6 +49,15 @@ export class BookAppointmentComponent {
 
   AppointmentBooking(data:any){
 
+  }
+
+  openModal(id:any,date:any,time:any): void {
+    console.log(id);
+    const modalRef = this.modalService.open(BookModalComponent);
+
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.date = date;
+    modalRef.componentInstance.time = time;
   }
 
   ngOnInit(){

@@ -109,13 +109,12 @@ router.post('/book_schedule', function (req, res) {
 });
 
 //checkavailablity
-
 router.post('/checkavailablity', function (req, res) {
     // middleware.decryption(req.body, function (request) {
     let request = req.body;
+    request.user_id = req.user_id;
 
     const rules = {
-        doctor_id: "required",
         date: "required",
         appointment_time: "required",
     };
@@ -154,33 +153,37 @@ router.post('/docterlisting', function (req, res) {
     // });
 });
 
-// router.post('/checkavailablity', function (req, res) {
-//     // middleware.decryption(req.body, function (request) {
-//     let request = req.body;
-
-//     const rules = {
-//         doctor_id: "required",
-//         date: "required",
-//         start_time: "required",
-//         end_time: "required"
-//     };
-
-//     const message = {
-//         required: req.language.rest_keywords_required_messages
-//     };
-
-//     if (middleware.checkValidationRules(request, res, rules, message)) {
-//         auth.checkAvailability(request, function (code, message, data) {
-//             middleware.sendResponse(req, res, code, message, data);
-//         });
-//     };
-//     // });
-// });
-
 //LOG OUT
 router.post('/logout', function (req, res) {
     auth.logOut(req, function (code, message, data) {
         middleware.sendResponse(req, res, code, message, data);
     });
 });
+
+// BOOK DOCTOR
+router.post('/bookdoctor', function (req, res) {
+    // middleware.decryption(req.body, function (request) {
+    let request = req.body;
+    request.user_id = req.user_id;
+
+    const rules = {
+        reason:"required",
+        doctor_id:"required",
+        appointment_date: "required",
+        appointment_time: "required",
+    };
+
+    const message = {
+        required: req.language.rest_keywords_required_messages
+    };
+
+    if (middleware.checkValidationRules(request, res, rules, message)) {
+        auth.bookDoctor(request, function (code, message, data) {
+            middleware.sendResponse(req, res, code, message, data);
+        });
+    };
+    // });
+});
+
+
 module.exports = router;

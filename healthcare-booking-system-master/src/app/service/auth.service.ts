@@ -132,10 +132,10 @@ export class AuthService {
     return new Observable<any>((observer) => {
       axios({
         method: 'post',
-        url: 'https://fe51-122-172-97-179.ngrok-free.app/api/doctors/checkavailablity',
+        url: 'http://localhost:8597/v1/doctors/checkavailablity',
         headers: {
-          'api-key': 'exam',
-          token: 'data',
+          'api-key': '20230420',
+          'token': localStorage.getItem('UserToken'),
           'Content-Type': 'application/json',
         },
         data: JSON.stringify(data),
@@ -155,5 +155,19 @@ export class AuthService {
           // this.toastr.error(error, 'Error!');
         });
     });
+  }
+
+
+  bookAppointment(data: any) {
+    axios({ method: 'post', url: 'http://localhost:8597/v1/doctors/bookdoctor', headers: { 'api-key': '20230420', 'token': localStorage.getItem('UserToken'), 'Content-Type': 'application/json' },data:data }).then((response) => {
+      if (response.data.code == 1) {
+        this.toastr.success(response.data.message, 'Success');
+        this.router.navigate(["/dashboard"])
+      } else {
+        this.toastr.error(response.data.message, 'Error');
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 }
