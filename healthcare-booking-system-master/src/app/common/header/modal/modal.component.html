@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4 class="modal-title">User Profile</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="text-center">
+        <img src="assets/img/profile-img.jpg" alt="User Profile Image" class="img-thumbnail profile-image">
+    </div>
+    <h5 class="text-center profile-name">{{userData?(userData.first_name+' '+userData.last_name):''}}</h5>
+    <p class="text-center profile-email">{{userData?userData.email:''}}</p>
+    
+    <hr>
+    
+    <div class="profile-details">
+        <h6>Additional Details:</h6>
+        <!-- Add other user details here -->
+        <p><strong>Role:</strong> {{(userData.role == 'D'?"Doctor":'Patient')| titlecase}}</p>
+        <!-- <p><strong>Location:</strong> New York, USA</p> -->
+    </div>
+
+    <!-- <div>
+        <button class="edit-button">Edit</button>
+    </div> -->
+</div>

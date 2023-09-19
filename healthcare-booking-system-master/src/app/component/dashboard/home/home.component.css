@@ -1,0 +1,75 @@
+ .main-home{
+    display: flex;
+    flex-wrap: wrap;
+}
+/*
+.card {
+    width: 22%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    margin: 16px;
+    background-color: #fff;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-content {
+    font-size: 1rem;
+    color: #333;
+}
+ */
+
+ .card {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.card-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.card-title h1 {
+    font-size: 24px;
+}
+
+.card-title h5 {
+    font-size: 14px;
+    color: #666;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.card-content h5 {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+a.routerLink {
+    display: block;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a.routerLink:hover {
+    background-color: #0056b3;
+}

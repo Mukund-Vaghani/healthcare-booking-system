@@ -1,0 +1,41 @@
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link" routerLink='/dashboard/'>
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <span *ngIf="role == 'D'">
+            <li class="nav-item">
+                <a class="nav-link" routerLink='add-availability'>
+                    <i class="bi bi-grid"></i>
+                    <span>Add Availability</span>
+                </a>
+            </li>
+        </span>
+
+        <span *ngIf="role == 'P'">
+            <li class="nav-item">
+                <a class="nav-link" routerLink='book-appointment'>
+                    <i class="bi bi-grid"></i>
+                    <span>Book Appointment</span>
+                </a>
+            </li>
+        </span>
+
+        <li class="nav-item">
+            <a class="nav-link logout-link" (click)="logout()" >
+                <i class="fa-solid fa-power-off"></i>
+                <span>Log Out</span>
+            </a>
+        </li>
+        
+        
+
+    </ul>
+
+</aside><!-- End Sidebar-->

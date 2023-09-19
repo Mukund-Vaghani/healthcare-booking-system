@@ -1,0 +1,113 @@
+<main>
+    <div class="container" *ngIf="!available">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                    <div class="card mb-3">
+
+                        <div class="card-body">
+
+                            <div class="pt-4 pb-2">
+                                <h5 class="card-title text-center pb-0 fs-4">Book Appointment</h5>
+                            </div>
+
+                            <form class="row g-3 needs-validation" [formGroup]="bookAppointment"
+                                (ngSubmit)="handleForm()">
+
+                                <div class="col-12">
+                                    <label for="date" class="form-label">Date</label>
+                                    <input type="date" name="date" formControlName="date" class="form-control"
+                                        [min]="minDate">
+                                    <span class="errormsg"
+                                        *ngIf="submitted && !bookAppointmentControls['date'].valid || !bookAppointmentControls['date'].valid && bookAppointmentControls['date'].touched">Please
+                                        provide date</span>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="appointment-time" class="form-label">Appointment Time</label>
+                                    <input type="time" name="appointment_time" formControlName="appointment_time" class="form-control">
+                                    <span class="errormsg"
+                                        *ngIf="submitted && !bookAppointmentControls['appointment_time'].valid || !bookAppointmentControls['appointment_time'].valid && bookAppointmentControls['appointment_time'].touched">Please
+                                        provide appointment time</span>
+                                </div>
+
+                                <!-- <div class="col-12">
+                                    <label for="end-time" class="form-label">End Time</label>
+                                    <input type="time" name="end_time" formControlName="end_time" class="form-control">
+                                    <span class="errormsg"
+                                        *ngIf="submitted && !bookAppointmentControls['end_time'].valid || !bookAppointmentControls['end_time'].valid && bookAppointmentControls['end_time'].touched">Please
+                                        provide end time</span>
+                                </div> -->
+
+                                <!-- <div class="dropdown-select">
+                                    <label for="end-time" class="form-label">List Of Doctors</label>
+                                    <select name="doctor_id" formControlName="doctor_id" class="form-control">
+                                        <option value=""></option>
+                                        <option *ngFor='let i of doctorList' [value]='i.id'>{{i.name}}</option>
+                                        <option value="d1">Doctor 1</option>
+                                        <option value="d2">Doctor 2</option>
+                                    </select>
+                                    <span class="dropdown-arrow"></span>
+                                </div>
+                                <span class="errormsg"
+                                    *ngIf="submitted && !bookAppointmentControls['doctor_id'].valid || !bookAppointmentControls['doctor_id'].valid && bookAppointmentControls['doctor_id'].touched">Please Select Doctor
+                                </span> -->
+
+                                <!-- <div class="col-12" *ngIf="available">
+                                    <label for="date" class="form-label">Reason</label>
+                                    <textarea type="text" name="reason" formControlName="reason" class="form-control"></textarea>
+                                    <span class="errormsg"
+                                        *ngIf="submitted && !bookAppointmentControls['reason'].valid || !bookAppointmentControls['reason'].valid && bookAppointmentControls['reason'].touched">Please
+                                        provide reason
+                                    </span>
+                                </div> -->
+
+                                <div class="col-12">
+                                    <!-- <button class="btn btn-primary w-100" type="submit" (click)="checkAvailability()" *ngIf="!available">Check Availability</button> -->
+                                    <button class="btn btn-primary w-100" type="submit">Check Availability</button>
+                                    <!-- <button class="btn btn-primary w-100" type="submit" *ngIf="available">Book</button> -->
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="table-div" id="doctor" *ngIf="available">
+
+        <div class="category-header">
+            <h3 style=" margin: 5px 0px 5px 2px;">List of Doctor</h3>
+            <!-- <button class="btn btn-danger" (click)="openModal()"><i class="fa-solid fa-plus"></i> Add a New Product</button> -->
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Doctor Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Start Time</th>
+                    <!-- <th scope="col">End Time</th> -->
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of doctor">
+                    <th scope="row">{{i.doctor_id}}</th>
+                    <td>{{i.doctor_name}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.appointment_time}}</td>
+                    <!-- <td>{{i.end_time}}</td> -->
+                    <td>
+                        <button class="btn btn-danger" (click)="AppointmentBooking(i.doctor_id)">Book</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

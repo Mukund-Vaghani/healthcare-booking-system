@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="https://parsleyjs.org/src/parsley.css">
+</head>
+<body>
+    <center>
+    <form action="http://localhost:8597/v1/auth/resetpass/<%=id%>" method="post" data-parsley-validate="">
+        <div>
+        <label for="">New Password:</label><input type="password" name="newPassword" id="newPassword" style="height: 50px; width: 50%;" required></div><br>
+        <div>
+        <label for="">Confirm Password:</label><input type="password" name="confirmPassword" id="confirmPassword" style="height: 50px; width: 50%;" required 
+        data-parsley-equalto="#newPassword"></div><br>
+        <input type="submit" name="Reset Password" style="height: 55px; width: 20%;">
+    </form>
+</center>
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<script src="https://parsleyjs.org/dist/parsley.min.js"></script>
+<script src="https://parsleyjs.org/dist/parsley.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<main>
+    <div class="container">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                    <div class="card mb-3">
+
+                        <div class="card-body">
+
+                            <div class="pt-4 pb-2">
+                                <h5 class="card-title text-center pb-0 fs-4">Add Your Availability</h5>
+                            </div>
+
+                            <form class="row g-3 needs-validation" [formGroup]="availabilityForm"
+                                (ngSubmit)="handleForm()">
+
+                                <div class="col-12">
+                                    <label for="date" class="form-label">Date</label>
+                                    <input type="date" name="date" formControlName="date" class="form-control"
+                                        [min]="minDate">
+                                    <span class="errormsg"
+                                        *ngIf="submitted && !availabilityControls['date'].valid || !availabilityControls['date'].valid && availabilityControls['date'].touched">Please
+                                        provide date</span>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="start-time" class="form-label">Start Time</label>
+                                    <input type="time" name="start_time" formControlName="start_time"
+                                        class="form-control">
+                                    <span class="errormsg"
+                                        *ngIf="submitted && !availabilityControls['start_time'].valid || !availabilityControls['start_time'].valid && availabilityControls['start_time'].touched">Please
+                                        provide start time</span>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="end-time" class="form-label">End Time</label>
+                                    <input type="time" name="end_time" formControlName="end_time" class="form-control">
+                                    <span class="errormsg"
+                                        *ngIf="submitted && !availabilityControls['end_time'].valid || !availabilityControls['end_time'].valid && availabilityControls['end_time'].touched">Please
+                                        provide end time</span>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100" type="submit">Add</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</main><!-- End #main -->

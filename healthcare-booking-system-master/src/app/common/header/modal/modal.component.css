@@ -1,0 +1,45 @@
+/* CSS or SCSS */
+.profile-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.profile-email {
+    font-size: 1rem;
+    color: #777;
+}
+
+.profile-details {
+    margin-top: 20px;
+}
+
+.profile-details h6 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Edit Button */
+button.edit-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.edit-button:hover {
+    background-color: #0056b3;
+}
